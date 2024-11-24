@@ -7,5 +7,5 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark trên Intellij IDE
       <li>Thực hành khởi tạo và thao tác với Spark RDD.</li>
       <li>Thực hành khởi tạo và thao tác với Spark Data Frame để truy vấn dữ liệu.</li>
       <li>Thực hành sử dụng Spark SQL để thao tác và truy vấn dữ liệu trên CSDL MySQL.</li>
-      <li></li>
+   
   </ul>
