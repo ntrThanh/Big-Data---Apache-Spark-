@@ -1,7 +1,7 @@
 <h1>
 Thực hành demo cách sử dụng, cài đặt Apache Spark 
 </h1>
-<h2>Nội dung thực hành</h2>
+<h2>Nội dung thực hành:</h2>
   <ul>
       <li>Thực hành cài đặt, sử dụng công cụ Apache Spark bằng Java trên Intellij IDEA, Command Prompt.</li>
       <li>Thực hành khởi tạo và thao tác với Spark RDD.</li>
@@ -18,7 +18,7 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
   Cài đặt Spark  
 </h3>
 
-<span>Các bước cài đặt trên trực tiếp hệ điều hành Window </span>
+<span>Các bước cài đặt trên trực tiếp hệ điều hành Window</span>
 
 <ul>
   <li>Cài đặt phiên bản JDK 8 / 11 / 17 (hoặc có thể cài đặt Python, R phiên bản mới nhất nếu sử dụng PySpark, RSpark ...), một số phiên bản khác sẽ khiến trương trình không chạy được.</li>
@@ -39,10 +39,10 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
 
 <ul>
   <li>
-    Tạo một Project mới với Maven
+    Tạo một Project mới với Maven.
   </li>
   <li>
-  Sử dụng JDK 8 / 11 / 17 cho chương trình Java
+  Sử dụng JDK 8 / 11 / 17 cho chương trình Java.
   </li>
   <li>
   Vào phần cài đặt của IntelliJ -> Chọn Plugins -> Download Scala. 
@@ -110,7 +110,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 
 
   <li>
-  Chạy trương trình đầu tiên với Spark
+  Chạy trương trình đầu tiên với Spark:
 
     
     package org.example;
@@ -138,8 +138,12 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 </ul>
 
 <h3> 
-  Thực hành Demo  
+  Thực hành Demo
 </h3>
+
+<p>
+  Ở đây chúng tôi Demo bằng chương trình Java để thao tác với dữ liệu trên Intelij IDEA.
+</p>
 
 <h4>
   Làm việc với RDD
@@ -201,13 +205,13 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 </h4>
 
 <p>
-  Khởi tạo SparkSession
+  Khởi tạo SparkSession:
 
     SparkSession ss = SparkSession.builder().appName("Application").master("local").getOrCreate();
 </p>
 
 <p>
-  Thao tác dữ liệu với Dataframe
+  Thao tác dữ liệu với Dataframe:
 
     var dataFrame1 = ss.read()
             .option("header", "true")
@@ -229,7 +233,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 <p>
   Có thể sử dụng cơ sở dữ liệu trong các hệ quản trị cơ sở dữ liệu. Ở đây tôi sử dụng với MySQL thông qua JDBC.
 
-  Hàm lấy ra những bảng cơ sở dữ liệu dưới dạng <code> Dataset&lt;Row></code>:
+  Hàm lấy ra những bảng cơ sở dữ liệu dưới dạng <code>Dataset&lt;Row></code>:
 
     public static Dataset<Row> getTableFromDatabase(SparkSession ss, String tableName) {
         try {
@@ -275,6 +279,16 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
             "group by o.OrderID");
     df6.show();
 </p>
+
+<h2>
+Tham khảo:
+</h2>
+
+<ul>
+  <li>
+  Tham khảo tại <a href="https://spark.apache.org/docs/3.5.3/">Spark Documentation</a>
+  </li>
+</ul>
 
 
 
