@@ -63,6 +63,8 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
         <version>3.4.0</version>
     </dependency>
 
+  Còn phần sau đây để sử dụng trong Spark SQL:
+
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-sql -->
     <dependency>
         <groupId>org.apache.spark</groupId>
@@ -162,20 +164,37 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
 </p>
 
 <p> Các cách khởi tạo RDD để thao tác với dữ liệu:
+  <br>Khởi tạo song song:
 
     var javaRDD1 = sc.parallelize(Arrays.asList(1, 2, 7, 2, 5, 1, 3, 6, 3));
     javaRDD1.collect().forEach(x -> System.out.print(x + " "));
     System.out.println();
 
+  <br>
+  
+    Kết quả: 
+    1 2 7 2 5 1 3 6 3
+
+  <br> Khởi tạo từ một RDD khác:
+
     // map
     var javaRDD2 = javaRDD1.map(x -> x * 2); // khi rdd1 thuc hien map,
     // no se tao ra mot rdd moi va gan gia tri rdd moi vao rdd2
-    javaRDD2.collect().forEach(x -> System.out.print(x + " "));
+    javaRDD2.collect().forEach(x -> System.out.print(x + " ")); 
 
     // filter
     var javaRDD3 = javaRDD1.filter(x -> x % 2 == 0); // lamda function thuc hien lay la
     // nhung phan tu x ma x chia het cho 2
     javaRDD3.collect().forEach(x -> System.out.print(x + " "));
+
+  <br>
+
+    Kết quả: 
+    2 4 14 4 10 2 6 12 6
+    2 2 6
+
+  <br>Khởi tạo từ dữ liệu của file:
+
 
     // doc du lieu tu tap tin
     var javaRDD4 = sc.textFile("C:\\Users\\Trong Thanh\\Documents" +
@@ -194,6 +213,13 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
     javaRDD5.collect().forEach(x -> System.out.print(x +  " "));
     System.out.println();
 
+  <br>
+
+    Kết quả: 
+    ve chu de Apache Spark 
+
+
+  <br> Các phương pháp <code>group by key, reduce by key</code> trong RDD 
 
     // group by key va reduce by key
     var javaRDD6 = javaRDD4.flatMap(x -> Arrays.asList(x.split(" ")).iterator()).map(x -> new Tuple2<>(x, 1));
@@ -203,6 +229,13 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
     JavaPairRDD<String, Integer> JavaPairRDD = javaRDD6.mapToPair(x -> new Tuple2<>(x._1(), x._2())).reduceByKey(Integer::sum);
     JavaPairRDD.collect().forEach(x -> System.out.print(x +  " "));
     System.out.println();
+
+  <br>
+
+    Kết quả: 
+    (xin,1) (chao,1) (moi,1) (nguoi,1) (hom,1) (nay,1) (toi,1) (thuc,1) (hanh,1) (demo,1) (ve,1) (du,1) (lieu,1) (lon,1) (ve,1) (chu,1) (de,1) (Apache,1) (Spark,1) (moi,1) (thac,1) (mac,1) (lien,1) (he,1) (truc,1) (tiep,1) (toi,1) (toi,1) (qua,1) (email,1) (nguyentrongthanh672@gmail.com,1) 
+    (hanh,1) (hom,1) (Spark,1) (nay,1) (de,1) (qua,1) (Apache,1) (lien,1) (ve,2) (demo,1) (nguoi,1) (he,1) (mac,1) (toi,3) (truc,1) (chao,1) (du,1) (email,1) (nguyentrongthanh672@gmail.com,1) (lon,1) (xin,1) (chu,1) (moi,2) (thuc,1) (tiep,1) (lieu,1) (thac,1) 
+
 
 </p>
 
@@ -231,7 +264,6 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
 
     var dataFrame3 = dataFrame1.filter("(toan + vat_li + hoa_hoc) > 28 and lich_su is null and dia_li is null and gdcd is null");
     dataFrame3.show(); // lay ra cac thi sinh hoc khoi A co diem thi lon hon 28
-
 </p>
 
 <h4>
@@ -289,6 +321,28 @@ Truy vấn đơn giản, trước khi truy vấn với bảng thì phải tạo 
             "group by o.OrderID");
     df6.show();
 
+</p>
+
+<h2>
+Note 
+</h2>
+
+<p>
+  Tại thời điểm chạy trương trình, có thể sử dụng luồng (Thread) trong Java để có thể ngăn cách các trương trình chạy, sau đó truy cập localhost của chương trình trên trình duyệt để theo dõi cách chương trình hoạt động (việc phân vùng, chia các task, stage).
+
+    public class Main throws InterruptedException {
+      public static void main(String[] ags) {
+        // code here
+
+
+        Thread.sleep(60000); // 60000 mili giây
+      }
+    }
+
+  Ở đây chúng tôi lấy ví dụ đặt ở cuối trương trình để có thể xem được toàn bộ các hoạt động trong chương trình của Apache Spark.
+  Ví dụ như: <code>http://DESKTOP-3K5JCE6:4040</code>, tùy thuộc vào mỗi máy lại có các địa chỉ localhost của chương trình khác nhau.
+
+  <img src="C:\Users\Trong Thanh\Documents\BIG DATA\DemoSpark\img\Spark.png" />
 </p>
 
 <h2>
