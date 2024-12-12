@@ -48,7 +48,7 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
   Vào phần cài đặt của IntelliJ -> Chọn Plugins -> Download Scala. 
   </li>
   <li>
-  Vào trang web <a>https://mvnrepository.com/</a> và tìm kiểm thư viện Apache Spark là Spark 
+  Vào trang web <a href="https://mvnrepository.com/"> maven repository</a> và tìm kiểm thư viện Apache Spark là Spark 
 Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 
         <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
