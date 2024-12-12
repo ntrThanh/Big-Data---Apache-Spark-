@@ -18,6 +18,10 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
   Cài đặt Spark  
 </h3>
 
+<p>
+  Do bị giới hạn về phần cứng nên ở đây chúng tôi xin trình bày cách cài đặt Apache Spark trên chế độ Local mode (sử dụng Google colab thì trong một phiên chỉ sử dụng tối đa 1 CPU nên việc cài đặt cluster trên Google colab gần như không khả thi).
+</p>
+
 <span>Các bước cài đặt trên trực tiếp hệ điều hành Window</span>
 
 <ul>
