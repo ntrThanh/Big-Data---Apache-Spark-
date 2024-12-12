@@ -13,7 +13,7 @@ import scala.Tuple2;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Logger.getLogger("org.apache").setLevel(Level.ERROR);
 
         SparkConf sparkConf = new SparkConf().setAppName("Application").setMaster("local");
@@ -61,7 +61,6 @@ public class Main {
         JavaPairRDD.collect().forEach(x -> System.out.print(x +  " "));
         System.out.println();
 
-
         // data frame
         // su dung dataframe de truy van ket qua diem thi trung hoc pho thong
 
@@ -89,7 +88,7 @@ public class Main {
         df2.show(); // in ra thong tin cac don hang
 
         // truy van don gian
-        var df3 = ss.sql("SELECT * FROM Customers AS c INNER JOIN Orders AS o ON o.CustomerID = c.CustomerID WHERE o.OrderId = 10248");
+        Dataset<Row> df3 = ss.sql("SELECT * FROM Customers AS c INNER JOIN Orders AS o ON o.CustomerID = c.CustomerID WHERE o.OrderId = 10248");
         df3.show(); // thuc hien truy van lay ra khach hang co order id = 10248
 
         // truy van tinh doanh thu theo tung nam trong co so du lieu
@@ -98,8 +97,13 @@ public class Main {
         df4.show();
 
 
-        var df6 = ss.sql("select o.OrderID, sum(od.Quantity) as TotalQuantity from Orders as o inner join OrderDetails as od on o.OrderID = od.OrderID group by o.OrderID");
+        var df6 = ss.sql("select o.OrderID, sum(od.Quantity) as TotalQuantity " +
+                "from Orders as o " +
+                "inner join OrderDetails as od " +
+                "on o.OrderID = od.OrderID " +
+                "group by o.OrderID");
         df6.show();
+        Thread.sleep(600000);
     }
 
     public static Dataset<Row> getTableFromDatabase(SparkSession ss, String tableName) {
