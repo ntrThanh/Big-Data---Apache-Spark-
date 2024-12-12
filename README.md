@@ -32,6 +32,7 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
   Kiểm tra lại bằng cách mở CMD và gõ:
 
     spark-shell
+
   </li>
 </ul>
 
@@ -49,7 +50,7 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
   </li>
   <li>
   Vào trang web <a href="https://mvnrepository.com/"> maven repository</a> và tìm kiểm thư viện Apache Spark là Spark 
-Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
+Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dependencies</code>.
 
     <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core -->
     <dependency>
@@ -78,10 +79,11 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.33</version>
     </dependency>
+
   </li>
 
   <li>
-  Sau đó thể phần build vào file Pom.xml.
+  Sau đó thể phần build vào file <code>pom.xml</code>.
     
     <build>
         <plugins>
@@ -108,11 +110,9 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
     </build>
   </li>
 
-
   <li>
   Chạy trương trình đầu tiên với Spark:
 
-    
     package org.example;
 
     import java.util.*;
@@ -133,6 +133,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
             JavaRDD<Integer> newData = distData.map(x -> x * 2);
         }
     }
+
   </li>
 
 </ul>
@@ -153,6 +154,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 
     SparkConf sparkConf = new SparkConf().setAppName("Application").setMaster("local");
     JavaSparkContext sc = new JavaSparkContext(sparkConf);
+
 </p>
 
 <p> Các cách khởi tạo RDD để thao tác với dữ liệu:
@@ -197,8 +199,8 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
     JavaPairRDD<String, Integer> JavaPairRDD = javaRDD6.mapToPair(x -> new Tuple2<>(x._1(), x._2())).reduceByKey(Integer::sum);
     JavaPairRDD.collect().forEach(x -> System.out.print(x +  " "));
     System.out.println();
-</p>
 
+</p>
 
 <h4>
   Làm việc với Dataframe
@@ -208,6 +210,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
   Khởi tạo SparkSession:
 
     SparkSession ss = SparkSession.builder().appName("Application").master("local").getOrCreate();
+
 </p>
 
 <p>
@@ -224,6 +227,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 
     var dataFrame3 = dataFrame1.filter("(toan + vat_li + hoa_hoc) > 28 and lich_su is null and dia_li is null and gdcd is null");
     dataFrame3.show(); // lay ra cac thi sinh hoc khoi A co diem thi lon hon 28
+
 </p>
 
 <h4>
@@ -233,7 +237,9 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
 <p>
   Có thể sử dụng cơ sở dữ liệu trong các hệ quản trị cơ sở dữ liệu. Ở đây tôi sử dụng với MySQL thông qua JDBC.
 
-  Hàm lấy ra những bảng cơ sở dữ liệu dưới dạng <code>Dataset&lt;Row></code>:
+  Thêm thư viện Spark SQL vào trong file <code>pom.xml</code> cùng với đó là thư viện JDBC của Java (trên tiêu đề đã có).
+
+Hàm lấy ra những bảng cơ sở dữ liệu dưới dạng <code>Dataset&lt;Row></code>:
 
     public static Dataset<Row> getTableFromDatabase(SparkSession ss, String tableName) {
         try {
@@ -251,7 +257,7 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
         return null;
     }
 
-  Truy vấn đơn giản, trước khi truy vấn với bảng thì phải tạo view:
+Truy vấn đơn giản, trước khi truy vấn với bảng thì phải tạo view:
 
     // truy van co so du lieu su dung spark sql (spark sql chi dong vai tro la cong cu de thuc thi truy van mot cach de dang va toi uu hon)
     var df1 = getTableFromDatabase(ss, "Customers");
@@ -278,7 +284,22 @@ Project Core sau đó thêm vào file Pom.xml trong thẻ 'dependencies'.
             "on o.OrderID = od.OrderID " +
             "group by o.OrderID");
     df6.show();
+
 </p>
+
+<h2>
+Nguồn dữ liệu:
+</h2>
+<ul>
+  <li>
+  Cơ sở dữ liệu <a href="https://support.microsoft.com/vi-vn/office/s%C6%A1-%C4%91%E1%BB%93-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u-northwind-cd422d47-e4e3-4819-8100-cdae6aaa0857">Northwind </a>
+  </li>
+
+  <li>
+  Dữ liệu <a href="https://github.com/anhdung98/diem_thi_2023">điểm thi trung học phổ thông</a>
+  </li>
+
+</ul>
 
 <h2>
 Tham khảo:
@@ -288,9 +309,5 @@ Tham khảo:
   <li>
   Tham khảo tại <a href="https://spark.apache.org/docs/3.5.3/">Spark Documentation</a>
   </li>
+
 </ul>
-
-
-
-
-
