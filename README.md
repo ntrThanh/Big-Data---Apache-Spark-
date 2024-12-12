@@ -342,8 +342,7 @@ Note
   Ở đây chúng tôi lấy ví dụ đặt ở cuối trương trình để có thể xem được toàn bộ các hoạt động trong chương trình của Apache Spark.
   Ví dụ như: <code>http://DESKTOP-3K5JCE6:4040</code>, tùy thuộc vào mỗi máy lại có các địa chỉ localhost của chương trình khác nhau.
 
-  <iframe src="https://drive.google.com/file/d/1iMlrZIl6taroD4qFGFcHTPzr0V9SacQL/preview" width="640" height="480" allow="autoplay"></iframe>
-</p>
+  <img src="../img/Spark.png" alt="Spark Logo" /></p>
 
 <h2>
 Nguồn dữ liệu:
