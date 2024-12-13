@@ -349,7 +349,7 @@ Truy vấn đơn giản, trước khi truy vấn với bảng thì phải tạo 
 </p>
 
 <h3> 
-  Thực hành Demo trên Local mode
+  Thực hành Demo trên Cluster mode
 </h3>
 
 <p>
