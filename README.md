@@ -1,9 +1,9 @@
 <h1>
-Thực hành demo cách sử dụng, cài đặt Apache Spark 
+Thực hành demo cách sử dụng, cài đặt Apache Spark trên Local và Cluster
 </h1>
 <h2>Nội dung thực hành:</h2>
   <ul>
-      <li>Thực hành cài đặt, sử dụng công cụ Apache Spark bằng Java trên Intellij IDEA, Command Prompt.</li>
+      <li>Thực hành cài đặt, sử dụng công cụ Apache Spark bằng Java trên Intellij IDEA, Command Prompt, DataBricks.</li>
       <li>Thực hành khởi tạo và thao tác với Spark RDD.</li>
       <li>Thực hành khởi tạo và thao tác với Spark Data Frame để truy vấn dữ liệu.</li>
       <li>Thực hành sử dụng Spark SQL để thao tác và truy vấn dữ liệu trên CSDL MySQL.</li>
@@ -17,10 +17,6 @@ Thực hành demo cách sử dụng, cài đặt Apache Spark
 <h3> 
   Cài đặt Spark  
 </h3>
-
-<p>
-  Do bị giới hạn về phần cứng nên ở đây chúng tôi xin trình bày cách cài đặt Apache Spark trên chế độ Local mode (sử dụng Google colab thì trong một phiên chỉ sử dụng tối đa 1 CPU nên việc cài đặt cluster trên Google colab gần như không khả thi).
-</p>
 
 <span>Các bước cài đặt trên trực tiếp hệ điều hành Window</span>
 
@@ -144,8 +140,37 @@ Project Core sau đó thêm vào file <code>pom.xml</code> trong thẻ <code>dep
 
 </ul>
 
+<span>Cài đặt Spark trên Cluster sử dụng công cụ Databricks</span>
+
+<ul>
+  <li>
+  Đăng kí tài khoản trên <a href="https://www.databricks.com/spark/about">DataBricks</a>.
+  </li>
+
+  <li>
+  Tạo các Cluster trong mục Compute (Phiên bản miễn phí thì chỉ cho tạo 1 Cluster).
+  </li>
+
+  <li>
+  Vào thư mục Workspace, tạo một thư mục chứa một Notebook
+  </li>
+
+  <li>
+  Thêm dữ liệu, có thể thêm dữ liệu bằng Cloud trong microsoft, google, ..., có thể thêm các file dữ liệu từ máy local.
+  </li>
+
+  <li>
+  Thao tác trên Notebook
+
+    df = spark.read.format("default").table("diem_thi_thpt_2023_csv")
+
+    # Hiển thị dữ liệu
+    df.show()
+  </li>
+</ul>
+
 <h3> 
-  Thực hành Demo
+  Thực hành Demo trên Local mode
 </h3>
 
 <p>
@@ -323,6 +348,33 @@ Truy vấn đơn giản, trước khi truy vấn với bảng thì phải tạo 
 
 </p>
 
+<h3> 
+  Thực hành Demo trên Local mode
+</h3>
+
+<p>
+  Ở đây chúng tôi sử dụng Công cụ Data Bricks để thao tác với dữ liệu với Spark.
+</p>
+
+<p>
+  Chương trình đầu tiên:
+
+    df = spark.read.format("default").table("diem_thi_thpt_2023_csv")
+
+    # Hiển thị dữ liệu
+    df.show()
+</p>
+
+<p>
+  Sử dụng Spark SQL để truy vấn:
+
+    # Sử dụng SQL để truy vấn bảng trong Catalog
+    df = spark.sql("SELECT * FROM default.diem_thi_thpt_2023_csv")
+
+    # Hiển thị dữ liệu
+    df.show()
+</p>
+
 <h2>
 Note 
 </h2>
@@ -342,7 +394,8 @@ Note
   Ở đây chúng tôi lấy ví dụ đặt ở cuối trương trình để có thể xem được toàn bộ các hoạt động trong chương trình của Apache Spark.
   Ví dụ như: <code>http://DESKTOP-3K5JCE6:4040</code>, tùy thuộc vào mỗi máy lại có các địa chỉ localhost của chương trình khác nhau.
 
-  <img src="/img/Spark.png" alt="Spark Logo" /></p>
+  <img src="/img/Spark.png" alt="Spark Logo" />
+</p>
 
 <h2>
 Nguồn dữ liệu:
